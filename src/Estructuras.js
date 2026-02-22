@@ -6,6 +6,7 @@ export class ListaMusica {
 export const playlist = new ListaMusica();
 playlist.agregarCancion('El Triste', 'José José');
 playlist.agregarCancion('La Incondicional', 'Luis Miguel');
+playlist.agregarCancion('Querida', 'Juan Gabriel');
 
 export class NodoPagina { constructor(u) { this.url = u; this.siguiente = null; this.anterior = null; } }
 export class HistorialNavegador {
@@ -13,5 +14,7 @@ export class HistorialNavegador {
     visitarNuevaPagina(u) { const n = new NodoPagina(u); if (!this.actual) { this.actual = n; } else { n.anterior = this.actual; this.actual.siguiente = n; this.actual = n; } }
 }
 export const historial = new HistorialNavegador();
-historial.visitarNuevaPagina('aimlabs.com/profile');
-historial.visitarNuevaPagina('overwatch.blizzard.com/ashe');
+historial.visitarNuevaPagina('canvas.uao.edu.co');
+historial.visitarNuevaPagina('github.com/jaguark11');
+historial.visitarNuevaPagina('stackoverflow.com/questions');
+historial.visitarNuevaPagina('youtube.com/lofi-hip-hop');
