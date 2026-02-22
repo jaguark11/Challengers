@@ -1,35 +1,15 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+﻿import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { playlist, historial } from './Estructuras';
 
+const MusicPage = () => {
+    const [nodo, setNodo] = useState(playlist.cabeza);
+    return (<div style={{padding:'20px'}}><h2>Reproductor (Lista Simple)</h2>{nodo ? (<div><h3>{nodo.titulo}</h3><p>{nodo.artista}</p><button onClick={() => setNodo(nodo.siguiente)}>Siguiente ⏭️</button></div>) : <p>Fin de la lista</p>}<br/><Link to='/history'><button>Ir a Historial</button></Link></div>);
+};
 
-function App() {
-  const [count, setCount] = useState(0)
+const HistoryPage = () => {
+    const [pag, setPag] = useState(historial.actual);
+    return (<div style={{padding:'20px'}}><h2>Historial (Lista Doble)</h2>{pag ? (<div><h3>URL: {pag.url}</h3><button onClick={() => setPag(pag.anterior)} disabled={!pag.anterior}>⬅️ Atrás</button> <button onClick={() => setPag(pag.siguiente)} disabled={!pag.siguiente}>Adelante ➡️</button></div>) : <p>Historial vacío</p>}<br/><Link to='/'><button>Volver al Reproductor</button></Link></div>);
+};
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
-
-export default App
+export default function App() { return <BrowserRouter><Routes><Route path='/' element={<MusicPage />} /><Route path='/history' element={<HistoryPage />} /></Routes></BrowserRouter>; }
